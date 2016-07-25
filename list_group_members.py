@@ -51,11 +51,11 @@ def main ():
 
 	for i in range (0, int (group_numbers / group_step) + 1):
 		responce = vk.groups.get (count = group_step, 
-								  offset = group_step * i + constOffset)
+				offset = group_step * i + constOffset)
 
 		for groupId in responce ['items']:
 			groupInfo = vk.groups.getById (group_id = groupId, 
-										   fields = 'members_count')
+					fields = 'members_count')
 
 			if counter > maxCounter:
 				break
@@ -68,9 +68,9 @@ def main ():
 			membersStep = 1000
 			membersCount = groupInfo [0]['members_count'] 
 
-			print ("members : " 	  + 
+			print ("members : " + 
 					str(membersCount) + 
-					" in " 			  + 
+					" in " + 
 					groupInfo [0]['name'])
 
 			if membersCount == 0:
@@ -88,7 +88,7 @@ def main ():
 
 			for num in range (0, maxNum):
 				print (indent, "num =", num, 
-						"end", maxNum)
+					"end", maxNum)
 
 				statmentNumber = stepNumbers
 				if stepNumbers > 25:
@@ -97,20 +97,20 @@ def main ():
 
 				with vk_api.VkRequestsPool(vk_session) as pool:
 					responce = pool.method_one_param ('groups.getMembers',
-													  {'group_id' : groupId,
-													   'sort' : "id_asc",
-													   'count' : membersStep},
-													   'offset',
-													   [x for x in range
-													   	(num * membersStep * 25,
-													   	 num * membersStep * 25 +
-													   	 statmentNumber * membersStep,
-													   	 membersStep)])
+							{'group_id' : groupId,
+							'sort' : "id_asc",
+							'count' : membersStep},
+							'offset',
+							[x for x in range
+							(num * membersStep * 25,
+							num * membersStep * 25 +
+							statmentNumber * membersStep,
+							membersStep)])
 
 				print (indent, range (num * membersStep * 25,
-								   	 num * membersStep * 25 +
-								   	 statmentNumber * membersStep,
-								   	 membersStep))	
+							num * membersStep * 25 +
+							statmentNumber * membersStep,
+							membersStep))	
 		
 				if len (responce) == 0:
 					print ("<<< CRITICAL ERROR. VK WAS BANNED YOU >>>")
@@ -128,10 +128,10 @@ def main ():
 
 			file = open (filename, "w")
 			json.dump (jsonData, 
-					   file, 
-					   sort_keys = True, 
-					   indent = 4, 
-					   ensure_ascii = False)
+				file, 
+				sort_keys = True, 
+				indent = 4, 
+				ensure_ascii = False)
 
 			file.close ()
 			
